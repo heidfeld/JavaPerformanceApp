@@ -12,27 +12,62 @@
     <dependencies>
 
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
             <artifactId>jboss-annotations-api_1.2_spec</artifactId>
             <version>1.0.2.Final</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
             <version>3.5.0.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>24.0-jre</version>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>java-performance-app</warName>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.codehaus.jackson.jackson-mapper-asl,org.apache.httpcomponents,org.jboss.resteasy.resteasy-jaxrs,org.jboss.resteasy.resteasy-jaxb-provider,org.jboss.resteasy.resteasy-multipart-provider,org.jboss.resteasy.resteasy-jackson2-provider,org.apache.commons.io,
+                                com.google.guava,
+                                org.apache.commons.lang</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.2.Final</version>
+            </plugin>
+        </plugins>
     </build>
 
 
