@@ -6,6 +6,7 @@
 
     <groupId>com.lukasz.mgr</groupId>
     <artifactId>JavaPerformanceApp</artifactId>
+    <name>java-performance-app</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -17,7 +18,6 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/jaxrs-api -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
@@ -25,5 +25,9 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>java-performance-app</finalName>
+    </build>
 
 </project>
