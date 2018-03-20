@@ -1,11 +1,13 @@
 package performance.boundary;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import performance.control.requeststrike.RequestStrike;
 
 /**
  * Created by Lukasz Karmanski
@@ -16,11 +18,22 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class RequestStrikeService {
 
+    @Inject
+    private RequestStrike requestStrike;
+
     @GET
     @Path("/base")
     @Produces(MediaType.TEXT_PLAIN)
     public Response runBaseRequestStrike() {
         return Response.ok("OK").build();
+    }
+
+    @GET
+    @Path("/external")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response runExternalRequestStrike() {
+        String result = requestStrike.run();
+        return Response.ok(result).build();
     }
 
 }
