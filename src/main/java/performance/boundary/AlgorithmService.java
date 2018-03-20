@@ -1,5 +1,6 @@
 package performance.boundary;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -9,12 +10,15 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Lukasz Karmanski
  */
-@Path("/v1/heartbeat")
-public class HeartbeatService {
+@Path("/algorithm")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class AlgorithmService {
 
-    @Produces({ MediaType.TEXT_PLAIN })
     @GET
-    public Response getHeartBeat() {
+    @Path("/base")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response runBaseAlgorithm() {
         return Response.ok("OK").build();
     }
 
