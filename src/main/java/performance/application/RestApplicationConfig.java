@@ -1,4 +1,4 @@
-package performance;
+package performance.application;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -7,6 +7,6 @@ import javax.ws.rs.core.Application;
  * Created by Lukasz Karmanski
  */
 
-@ApplicationPath("")
-public class JavaPerformanceApplication extends Application {
+@ApplicationPath("/rest")
+public class RestApplicationConfig extends Application {
 }
