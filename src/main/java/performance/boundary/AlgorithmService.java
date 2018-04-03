@@ -35,6 +35,4 @@ public class AlgorithmService {
         return Response.ok(result).build();
     }
 
-    //test
-
 }
