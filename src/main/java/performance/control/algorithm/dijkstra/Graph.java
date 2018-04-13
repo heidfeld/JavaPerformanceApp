@@ -36,4 +36,9 @@ public class Graph {
     public int getSize() {
         return nodes.size();
     }
+
+    public Set<Node> getNodes() {
+        return nodes;
+    }
+
 }
