@@ -32,4 +32,8 @@ public class Graph {
         return nodes.stream().count();
 
     }
+
+    public int getSize() {
+        return nodes.size();
+    }
 }
