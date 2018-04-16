@@ -1,20 +1,22 @@
 package performance.control.algorithm.result;
 
-import performance.control.algorithm.dijkstra.Graph;
 import performance.control.algorithm.dijkstra.Node;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DijkstraResult extends AlgorithmResult {
 
-    private Graph graph;
+    private Map<String, Integer> distancesMap = new HashMap<>();
     private Node node;
     private Integer nodeSize;
 
-    public Graph getGraph() {
-        return graph;
+    public Map<String, Integer> getDistancesMap() {
+        return distancesMap;
     }
 
-    public void setGraph(Graph graph) {
-        this.graph = graph;
+    public void putDistance(String nodeName, Integer distance) {
+        this.distancesMap.put(nodeName, distance);
     }
 
     public Node getNode() {

@@ -32,7 +32,7 @@ public class PerformanceAlgorithm {
         result.setDbTime(dbTime);
         result.setNodeSize(resultGraph.getSize());
         result.setNode(randomNode);
-        result.setGraph(resultGraph);
+        resultGraph.getNodes().stream().forEach(n -> result.putDistance(n.getName(), n.getDistance()));
         return result;
     }
 

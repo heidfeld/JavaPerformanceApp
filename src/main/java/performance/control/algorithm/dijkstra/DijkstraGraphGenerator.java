@@ -18,7 +18,7 @@ public class DijkstraGraphGenerator {
         List<Node> nodes = generateNodes(nodeCount);
         for(Node node : nodes) {
             Integer randomNodesCount = getDividedNodesCount(nodes.size());
-            List<Node> randomNodes = getRandomNodes(nodes, randomNodesCount);
+            List<Node> randomNodes = getRandomNodes(node, nodes, randomNodesCount);
             randomNodes.stream().forEach(r -> node.addDestination(r, ThreadLocalRandom.current().nextInt(20)));
             graph.addNode(node);
         }
@@ -31,12 +31,12 @@ public class DijkstraGraphGenerator {
                 .collect(Collectors.toList());
     }
 
-    private static List<Node> getRandomNodes(List<Node> nodes, Integer nodeCount) {
+    private static List<Node> getRandomNodes(Node node, List<Node> nodes, Integer nodeCount) {
         List<Integer> randoms = IntStream.range(0, nodeCount)
                 .mapToObj(num -> ThreadLocalRandom.current().nextInt(nodes.size() - 1))
                 .collect(Collectors.toList());
 
-        return randoms.stream().map(r -> nodes.get(r)).collect(Collectors.toList());
+        return randoms.stream().map(r -> nodes.get(r)).filter(n -> !n.equals(node)).collect(Collectors.toList());
 
     }
 

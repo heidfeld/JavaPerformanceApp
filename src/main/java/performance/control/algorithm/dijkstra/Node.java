@@ -19,7 +19,10 @@ public class Node {
     Map<Node, Integer> adjacentNodes = new HashMap<>();
 
     public void addDestination(Node destination, int distance) {
-        adjacentNodes.put(destination, distance);
+        if(!adjacentNodes.containsKey(destination) && !destination.adjacentNodes.containsKey(this)) {
+            this.adjacentNodes.put(destination, distance);
+            destination.adjacentNodes.put(this, distance);
+        }
     }
 
     public Node(String name) {
@@ -52,6 +55,11 @@ public class Node {
 
     public Map<Node, Integer> getAdjacentNodes() {
         return adjacentNodes;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " " + this.distance;
     }
 
 }
