@@ -1,6 +1,5 @@
 package performance;
 
-import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,21 +14,6 @@ import performance.control.algorithm.dijkstra.Node;
  * Created by Lukasz Karmanski
  */
 public class JavaPerformanceApplicationTest {
-
-    @InjectMocks
-    private PerformanceAlgorithm performanceAlgorithm;
-
-    @Before
-    public void initMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void testCDI() {
-        String result = performanceAlgorithm.run();
-        Assert.assertNotNull(performanceAlgorithm);
-        Assert.assertNotNull(result);
-    }
 
     @Test
     public void testDijkstra() {
@@ -65,9 +49,9 @@ public class JavaPerformanceApplicationTest {
         Graph result = Dijkstra.calculateShortestPathFromSource(graph, nodeA);
         result.toString();
 
-        Assert.assertEquals(new Integer(24), result.getNode("E").getDistance());
-        Assert.assertEquals(new Integer(23), result.getNode("F").getDistance());
-        Assert.assertEquals(new Integer(0), result.getNode("A").getDistance());
+        Assert.assertEquals(Integer.valueOf(24), result.getNode("E").getDistance());
+        Assert.assertEquals(Integer.valueOf(23), result.getNode("F").getDistance());
+        Assert.assertEquals(Integer.valueOf(0), result.getNode("A").getDistance());
         Assert.assertEquals(6L, result.countNodes());
 
 

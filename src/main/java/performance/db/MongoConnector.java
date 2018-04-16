@@ -16,7 +16,7 @@ public class MongoConnector {
 
     private final static String MONGO_DB_HOST = "localhost";
     private final static Integer MONGO_DB_PORT = 27017;
-    private final static String MONGO_DB_NAME = "test";
+    private final static String MONGO_DB_NAME = "dijkstra";
 
     MongoDatabase db;
 

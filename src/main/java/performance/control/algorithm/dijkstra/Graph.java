@@ -41,4 +41,9 @@ public class Graph {
         return nodes;
     }
 
+    public Node getRandomNode() {
+        return nodes.stream()
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("Cannot find any Node in Graph."));
+    }
 }

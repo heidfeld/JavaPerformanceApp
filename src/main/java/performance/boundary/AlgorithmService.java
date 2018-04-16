@@ -1,13 +1,11 @@
 package performance.boundary;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import performance.control.algorithm.PerformanceAlgorithm;
+import performance.control.algorithm.result.DijkstraResult;
 
 /**
  * Created by Lukasz Karmanski
@@ -27,12 +25,11 @@ public class AlgorithmService {
         return Response.ok("OK").build();
     }
 
-    @GET
-    @Path("/external")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response runExternalAlgorithm() {
-        String result = performanceAlgorithm.run();
-        return Response.ok(result).build();
+    @POST
+    @Path("/dijkstra")
+    public DijkstraResult runDijkstraAlgorithm(@QueryParam("collectionName") @DefaultValue("dijkstra_nodes_30") String collectionName) {
+        DijkstraResult result = performanceAlgorithm.runDijkstraAlgorithm(collectionName);
+        return result;
     }
 
 }
