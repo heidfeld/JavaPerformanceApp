@@ -1,4 +1,7 @@
-package performance.control.algorithm.dijkstra;
+package performance.control.generators;
+
+import performance.control.algorithm.dijkstra.Graph;
+import performance.control.algorithm.dijkstra.Node;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

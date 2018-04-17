@@ -2,7 +2,7 @@ package performance;
 
 import org.junit.Assert;
 import org.junit.Test;
-import performance.control.algorithm.dijkstra.DijkstraGraphGenerator;
+import performance.control.generators.DijkstraGraphGenerator;
 import performance.control.algorithm.dijkstra.Graph;
 
 /**

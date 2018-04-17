@@ -3,21 +3,19 @@ package performance.db;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import org.bson.Document;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import performance.control.algorithm.dijkstra.DijkstraGraphGenerator;
+import performance.control.algorithm.result.DijkstraResult;
+import performance.control.generators.DijkstraGraphGenerator;
 import performance.control.algorithm.dijkstra.Graph;
 import performance.control.algorithm.dijkstra.Node;
 import performance.control.algorithm.dijkstra2.Graph2;
 import performance.control.algorithm.dijkstra2.Vertex2;
+import performance.control.generators.User;
+import performance.control.generators.UsersGenerator;
 
 /**
  * Created by Lukasz Karmanski
@@ -55,6 +53,32 @@ public class MongoDatabaseService {
 
         }
         graphCollection.insertMany(rows);
+    }
+
+    @POST
+    @Path("/users")
+    public void insertUsers(@QueryParam("collectionName") String collectionName,
+                            @QueryParam("count") Integer count) {
+        List<User> users = UsersGenerator.generate(count);
+        MongoCollection<Document> collection = mongoConnector.getCollection(collectionName);
+        List<Document> rows = new ArrayList<>();
+        int i = 0;
+        for(User user : users) {
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("name", user.getName());
+            dataMap.put("surname", user.getSurname());
+            dataMap.put("age", user.getAge());
+            dataMap.put("birthDate", user.getBirthDate());
+            dataMap.put("uuid", user.getUuid());
+            Document doc = new Document(dataMap);
+            rows.add(doc);
+            if(i > 0 && i % 1000 == 0) {
+                collection.insertMany(rows);
+                rows = new ArrayList<>();
+            }
+            i++;
+        }
+        collection.insertMany(rows);
     }
 
     @GET
