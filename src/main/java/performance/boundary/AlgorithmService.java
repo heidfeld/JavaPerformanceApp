@@ -5,6 +5,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import performance.control.algorithm.PerformanceAlgorithm;
+import performance.control.algorithm.result.Dijkstra2Result;
 import performance.control.algorithm.result.DijkstraResult;
 
 /**
@@ -29,6 +30,15 @@ public class AlgorithmService {
     @Path("/dijkstra")
     public DijkstraResult runDijkstraAlgorithm(@QueryParam("collectionName") @DefaultValue("dijkstra_nodes_30") String collectionName) {
         DijkstraResult result = performanceAlgorithm.runDijkstraAlgorithm(collectionName);
+        return result;
+    }
+
+    @POST
+    @Path("/dijkstra2")
+    public Dijkstra2Result runDijkstra2Algorithm(@QueryParam("collectionName") @DefaultValue("dijkstra_nodes_30") String collectionName,
+                                                 @QueryParam("fromNode") String fromNode,
+                                                 @QueryParam("toNode") String toNode) {
+        Dijkstra2Result result = performanceAlgorithm.runDijkstra2Algorithm(collectionName, fromNode, toNode);
         return result;
     }
 
