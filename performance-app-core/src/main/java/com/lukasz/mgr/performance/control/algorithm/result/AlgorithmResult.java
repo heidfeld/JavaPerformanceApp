@@ -2,9 +2,9 @@ package com.lukasz.mgr.performance.control.algorithm.result;
 
 public class AlgorithmResult {
 
-    private String algorithmName;
-    private Long alhorithmTime;
-    private Long dbTime;
+    protected String algorithmName;
+    protected Long alhorithmTime;
+    protected Long dbTime;
 
     public Long getAlhorithmTime() {
         return alhorithmTime;

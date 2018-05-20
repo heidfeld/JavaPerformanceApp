@@ -2,10 +2,13 @@ $(document).ready(function(){
     $("#button-algorithm").click(function(){
         $("#loader1").css("display", "block");
         $.ajax({
-            url: "/rest/algorithm/external",
-            type: 'GET',
+            url: "rest/algorithm/dijkstra2",
+            data: $("#algorithmForm").serialize(),
+            type: 'POST',
+            dataType: 'json',
             success: function(result){
-                $("#div1").html(result);
+                var textResult = JSON.stringify(JSON.parse(result),null,2);
+                $("#div1").html(textResult);
                 $("#loader1").css("display", "none");
             }
         });

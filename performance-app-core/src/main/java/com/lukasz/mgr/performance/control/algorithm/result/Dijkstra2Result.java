@@ -31,4 +31,13 @@ public class Dijkstra2Result extends AlgorithmResult {
     public void setShortestPath(List<String> shortestPath) {
         this.shortestPath = shortestPath;
     }
+
+    @Override
+    public String toString() {
+        return "Algorithm Result{" +
+                "algorithmName='" + algorithmName + '\'' +
+                "alhorithmTime='" + alhorithmTime + '\'' +
+                "dbTime='" + dbTime + '\'' +
+                '}';
+    }
 }
