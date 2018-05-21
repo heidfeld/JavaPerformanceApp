@@ -18,7 +18,8 @@ $(document).ready(function(){
     $("#button-request-strike").click(function(){
         $("#loader2").css("display", "block");
         $.ajax({
-            url: "/rest/request-strike/external",
+            url: "/rest/users/count",
+            data: $("#requestForm").serialize(),
             type: 'GET',
             success: function(result){
                 $("#div2").html(result);

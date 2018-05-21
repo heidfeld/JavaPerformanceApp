@@ -1,10 +1,15 @@
 package com.lukasz.mgr.performance.db;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import com.lukasz.mgr.api.users.User;
+import com.mongodb.BasicDBObject;
+import org.bson.BSON;
 import org.bson.Document;
 import com.lukasz.mgr.api.dijkstra.Graph;
 import com.lukasz.mgr.api.dijkstra.Graph2;
@@ -30,7 +35,7 @@ public class MongoDatabaseService {
     public Graph getDijkstraGraph(@QueryParam("collectionName") String collectionName) {
         Objects.requireNonNull(collectionName);
 
-        MongoCollection<Document> graphCollection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> graphCollection = mongoConnector.getDijkstraCollection(collectionName);
         FindIterable<Document> documents = graphCollection.find();
         Graph graph = new Graph();
 
@@ -56,7 +61,7 @@ public class MongoDatabaseService {
     public Graph2 getDijkstra2Graph(@QueryParam("collectionName") String collectionName) {
         Objects.requireNonNull(collectionName);
 
-        MongoCollection<Document> graphCollection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> graphCollection = mongoConnector.getDijkstraCollection(collectionName);
         FindIterable<Document> documents = graphCollection.find();
         Graph2 graph = new Graph2();
 
@@ -78,4 +83,30 @@ public class MongoDatabaseService {
                         .orElseThrow(() -> new RuntimeException("No Node with specified id."));
     }
 
+    @GET
+    @Path("user/random")
+    public User getRandomUser(@QueryParam("collectionName") String collectionName) {
+        MongoCollection<Document> usersCollection = mongoConnector.getUsersCollection(collectionName);
+
+        String[] surnames = new String[]{
+                "Smith","Johnson","Williams","Jones","Brown","Davis","Miller","Wilson","Moore",
+                "Taylor","Anderson","Thomas","Jackson","White","Harris","Martin","Thompson","Garcia",
+                "Martinez","Robinson","Clark","Lewis","Lee","Walker","Hall","Allen","Young",
+                "King","Wright","Hill","Scott","Green","Adams","Baker","Carter","Turner",
+        };
+
+        int random = ThreadLocalRandom.current().nextInt(surnames.length - 1);
+
+        BasicDBObject query = new BasicDBObject();
+        query.put("surname", surnames[random]);
+
+        Document userDocument = usersCollection.find(query).first();
+        User user = new User();
+        user.setAge(userDocument.getInteger("age"));
+        user.setBirthDate(userDocument.getDate("birthDate"));
+        user.setName(userDocument.getString("name"));
+        user.setSurname(userDocument.getString("surname"));
+        user.setUuid(userDocument.getString("uuid"));
+        return user;
+    }
 }

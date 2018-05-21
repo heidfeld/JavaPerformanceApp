@@ -17,24 +17,29 @@ public class MongoConnector {
     private final static String MONGO_DB_HOST = "localhost";
     private final static Integer MONGO_DB_PORT = 27017;
 
-    private final static String MONGO_DB_NAME = "dijkstra";
-    //private final static String MONGO_DB_NAME = "users";
+    private final static String DIJKSTRA_DATABASE = "dijkstra";
+    private final static String USERS_DATABASE = "users";
 
-    MongoDatabase db;
+    MongoDatabase dijkstraDatabase;
+    MongoDatabase usersDatabase;
 
     @PostConstruct
     public void prepareConnection() {
         MongoClient mongoClient = new MongoClient( MONGO_DB_HOST , MONGO_DB_PORT );
-        MongoDatabase db = mongoClient.getDatabase(MONGO_DB_NAME);
+        MongoDatabase dijkstraDatabase = mongoClient.getDatabase(DIJKSTRA_DATABASE);
+        MongoDatabase usersDatabase = mongoClient.getDatabase(USERS_DATABASE);
 
         Objects.requireNonNull(mongoClient);
-        this.db = db;
+        this.dijkstraDatabase = dijkstraDatabase;
+        this.usersDatabase = usersDatabase;
     }
 
-    public MongoCollection<Document> getCollection(String collectionName) {
-        return db.getCollection(collectionName);
+    public MongoCollection<Document> getDijkstraCollection(String collectionName) {
+        return dijkstraDatabase.getCollection(collectionName);
     }
 
-
+    public MongoCollection<Document> getUsersCollection(String collectionName) {
+        return usersDatabase.getCollection(collectionName);
+    }
 
 }

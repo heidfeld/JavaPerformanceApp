@@ -1,5 +1,9 @@
 package com.lukasz.mgr.performance.control.requeststrike;
 
+import com.lukasz.mgr.api.users.User;
+import com.lukasz.mgr.performance.db.MongoDatabaseService;
+
+import javax.inject.Inject;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -7,12 +11,19 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RequestStrike {
 
-    public String run() {
-        long start = System.currentTimeMillis();
-        long iterations = iterateElements();
-        long time = System.currentTimeMillis() - start;
-        return "<h4>Request Strike time: " + time + "ms<br>" +
-                "Request Strike iterations: " + iterations + "</h4>";
+    @Inject
+    private MongoDatabaseService mongoDatabaseService;
+
+    public UsersResult getRandomUser(String collectionName) {
+        long dbStart = System.currentTimeMillis();
+        User user = mongoDatabaseService.getRandomUser(collectionName);
+        long dbEnd = System.currentTimeMillis();
+        long dbTime = dbEnd - dbStart;
+
+        UsersResult result = new UsersResult();
+        result.setAlgorithmName("User Request");
+        result.setDbTime(dbTime);
+        return result;
     }
 
     private long iterateElements() {

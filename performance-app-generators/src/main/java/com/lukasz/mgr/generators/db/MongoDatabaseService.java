@@ -43,7 +43,7 @@ public class MongoDatabaseService {
         Objects.requireNonNull(collectionName);
         Graph graph = DijkstraGraphGenerator.generate(nodeCount);
 
-        MongoCollection<Document> graphCollection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> graphCollection = mongoConnector.getDijkstraCollection(collectionName);
         List<Document> rows = new ArrayList<>();
 
         for(Node node : graph.getNodes()) {
@@ -68,7 +68,7 @@ public class MongoDatabaseService {
     public void insertUsers(@QueryParam("collectionName") String collectionName,
                             @QueryParam("count") Integer count) {
         List<User> users = UsersGenerator.generate(count);
-        MongoCollection<Document> collection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> collection = mongoConnector.getUsersCollection(collectionName);
         List<Document> rows = new ArrayList<>();
         int i = 0;
         for(User user : users) {
@@ -94,7 +94,7 @@ public class MongoDatabaseService {
     public Graph getDijkstraGraph(@QueryParam("collectionName") String collectionName) {
         Objects.requireNonNull(collectionName);
 
-        MongoCollection<Document> graphCollection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> graphCollection = mongoConnector.getDijkstraCollection(collectionName);
         FindIterable<Document> documents = graphCollection.find();
         Graph graph = new Graph();
 
@@ -120,7 +120,7 @@ public class MongoDatabaseService {
     public Graph2 getDijkstra2Graph(@QueryParam("collectionName") String collectionName) {
         Objects.requireNonNull(collectionName);
 
-        MongoCollection<Document> graphCollection = mongoConnector.getCollection(collectionName);
+        MongoCollection<Document> graphCollection = mongoConnector.getDijkstraCollection(collectionName);
         FindIterable<Document> documents = graphCollection.find();
         Graph2 graph = new Graph2();
 
