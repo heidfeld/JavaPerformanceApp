@@ -40,4 +40,13 @@ public class Dijkstra2Result extends AlgorithmResult {
                 "dbTime='" + dbTime + '\'' +
                 '}';
     }
+
+    public String toHTML() {
+        return "<h5>RESULT:<br>" + algorithmName + "<br>" +
+                "algorithm time: " + alhorithmTime + "<br>" +
+                "database time: " + dbTime + "<br>" +
+                "from node: " + sourceNode + " to node: " + destinationNode + "<br>" +
+                "shortest path: " + shortestPath.toString() +
+                "</h5>";
+    }
 }

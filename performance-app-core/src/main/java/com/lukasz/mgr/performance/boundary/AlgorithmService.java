@@ -43,4 +43,15 @@ public class AlgorithmService {
         return result;
     }
 
+    @POST
+    @Path("/dijkstra/html")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public String runDijkstraAlgorithmHTML(@FormParam("collectionName") @DefaultValue("dijkstra_nodes_30") String collectionName,
+                                                 @FormParam("fromNode") String fromNode,
+                                                 @FormParam("toNode") String toNode) {
+        Dijkstra2Result result = performanceAlgorithm.runDijkstra2Algorithm(collectionName, fromNode, toNode);
+        return result.toHTML();
+    }
+
 }
