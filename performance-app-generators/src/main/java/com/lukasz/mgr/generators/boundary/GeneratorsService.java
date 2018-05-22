@@ -79,6 +79,7 @@ public class GeneratorsService {
             dataMap.put("age", user.getAge());
             dataMap.put("birthDate", user.getBirthDate());
             dataMap.put("uuid", user.getUuid());
+            dataMap.put("num", i);
             Document doc = new Document(dataMap);
             rows.add(doc);
             if(i > 0 && i % 1000 == 0) {
