@@ -5,6 +5,7 @@ public class AlgorithmResult {
     protected String algorithmName;
     protected Long alhorithmTime;
     protected Long dbTime;
+    protected long iterations;
 
     public Long getAlhorithmTime() {
         return alhorithmTime;
@@ -28,5 +29,13 @@ public class AlgorithmResult {
 
     public void setDbTime(Long dbTime) {
         this.dbTime = dbTime;
+    }
+
+    public long getIterations() {
+        return iterations;
+    }
+
+    public void setIterations(long iterations) {
+        this.iterations = iterations;
     }
 }

@@ -37,6 +37,7 @@ public class Dijkstra2Result extends AlgorithmResult {
         return "Algorithm Result{" +
                 "algorithmName='" + algorithmName + '\'' +
                 "alhorithmTime='" + alhorithmTime + '\'' +
+                "iterations='" + iterations + '\'' +
                 "dbTime='" + dbTime + '\'' +
                 '}';
     }
@@ -45,6 +46,7 @@ public class Dijkstra2Result extends AlgorithmResult {
         return "<h5>RESULT:<br>" + algorithmName + "<br>" +
                 "algorithm time: " + alhorithmTime + "<br>" +
                 "database time: " + dbTime + "<br>" +
+                "iterations: " + iterations + "<br>" +
                 "from node: " + sourceNode + " to node: " + destinationNode + "<br>" +
                 "shortest path: " + shortestPath.toString() +
                 "</h5>";

@@ -56,6 +56,7 @@ public class PerformanceAlgorithm {
         result.setSourceNode(fromNode);
         result.setDestinationNode(toNode);
         result.setShortestPath(shortestPath);
+        result.setIterations(graph.getIterations());
         return result;
     }
 

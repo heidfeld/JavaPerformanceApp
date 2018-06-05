@@ -35,10 +35,10 @@ public class AlgorithmService {
 
     @POST
     @Path("/dijkstra2")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Dijkstra2Result runDijkstra2Algorithm(@FormParam("collectionName") @DefaultValue("dijkstra_nodes_30") String collectionName,
-                                                 @FormParam("fromNode") String fromNode,
-                                                 @FormParam("toNode") String toNode) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Dijkstra2Result runDijkstra2Algorithm(@QueryParam("collectionName") @DefaultValue("dijkstra_nodes_3000") String collectionName,
+                                                 @QueryParam("fromNode") String fromNode,
+                                                 @QueryParam("toNode") String toNode) {
         Dijkstra2Result result = performanceAlgorithm.runDijkstra2Algorithm(collectionName, fromNode, toNode);
         return result;
     }
