@@ -14,7 +14,7 @@ public class RequestStrike {
     @Inject
     private MongoDatabaseService mongoDatabaseService;
 
-    public UsersResult getRandomUser(String collectionName) {
+    public UsersResult getRandomUserResult(String collectionName) {
         long dbStart = System.currentTimeMillis();
         User user = mongoDatabaseService.getRandomUser(collectionName);
         long dbEnd = System.currentTimeMillis();
@@ -24,6 +24,11 @@ public class RequestStrike {
         result.setAlgorithmName("User Request");
         result.setDbTime(dbTime);
         return result;
+    }
+
+    public User getRandomUser(String collectionName) {
+        User user = mongoDatabaseService.getRandomUser(collectionName);
+        return user;
     }
 
     private long iterateElements() {
